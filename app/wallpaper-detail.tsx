@@ -102,10 +102,10 @@ export default function WallpaperDetailScreen() {
         }
         
         // Show success toast
-        showToast('Wallpaper saved to Your Gallery!');
+        showToast('Downloaded!');
         
         // Also show alert for confirmation
-        Alert.alert('Success', 'Wallpaper saved to your Downloads folder!');
+        Alert.alert('Success', 'Wallpaper saved to your Gallery!');
       } else {
         throw new Error('Download failed');
       }
