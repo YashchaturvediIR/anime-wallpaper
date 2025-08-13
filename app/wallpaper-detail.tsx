@@ -102,7 +102,7 @@ export default function WallpaperDetailScreen() {
         }
         
         // Show success toast
-        showToast('Wallpaper saved to Downloads!');
+        showToast('Wallpaper saved to Your Gallery!');
         
         // Also show alert for confirmation
         Alert.alert('Success', 'Wallpaper saved to your Downloads folder!');
