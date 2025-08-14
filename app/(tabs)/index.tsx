@@ -59,13 +59,18 @@ const styles = StyleSheet.create({
   },
     header: {
         paddingHorizontal: 20,
-        paddingVertical: 25, // Increased padding for more space
+        paddingVertical: 35, // Further increased padding for more space
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#ffffff',
-    marginBottom: 4,
+    title: {
+        fontSize: 28, // Increased font size
+        fontWeight: '700',
+        color: '#ff69b4', // Vibrant pink color
+        textShadowColor: '#000000', // Shadow color
+        textShadowOffset: { width: 1, height: 1 }, // Shadow offset
+        textShadowRadius: 2, // Shadow radius
+        marginBottom: 4,
+        fontFamily: 'Dancing Script', // Chosen cursive font
+        fontStyle: 'italic', // Added italic style
   },
   subtitle: {
     fontSize: 14,
