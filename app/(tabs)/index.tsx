@@ -16,21 +16,36 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Stack.Screen 
-        options={{ 
+      <Stack.Screen
+        options={{
           title: 'Anime Wallpapers',
           headerStyle: { backgroundColor: '#1a1a1a' },
           headerTintColor: '#ffffff',
           headerTitleStyle: { fontWeight: '600' },
-        }} 
+        }}
       />
-      
+
       <View style={styles.header}>
-        <Text style={styles.title}>Discover Amazing Wallpapers</Text>
-        <Text style={styles.subtitle}>Thousands of anime wallpapers at your fingertips</Text>
+        {isLoading ? (
+          <View style={styles.loadingCategories}>
+            <Text style={styles.loadingText}>Loading categories...</Text>
+          </View>
+        ) : (
+          <View>
+            <Text style={styles.title}>Discover Amazing Wallpapers</Text>
+            <Text style={styles.subtitle}>
+              Thousands of anime wallpapers at your fingertips
+            </Text>
+          </View>
+        )}
       </View>
 
-      <CategoryFilter
+      <View style={{ marginVertical: 10 }}> {/* Add margin for spacing */}
+        <CategoryFilter
+         selectedCategory={selectedCategory}
+         onCategoryChange={handleCategoryChange}
+       />
+      </View> {/* Closing the View component */}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
@@ -57,20 +72,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#0f0f0f',
   },
-    header: {
-        paddingHorizontal: 20,
-        paddingVertical: 35, // Further increased padding for more space
+  header: {
+    paddingHorizontal: 20,
+    paddingVertical: 35,
   },
-    title: {
-        fontSize: 28, // Increased font size
-        fontWeight: '700',
-        color: '#ff69b4', // Vibrant pink color
-        textShadowColor: '#000000', // Shadow color
-        textShadowOffset: { width: 1, height: 1 }, // Shadow offset
-        textShadowRadius: 2, // Shadow radius
-        marginBottom: 4,
-        fontFamily: 'Dancing Script', // Chosen cursive font
-        fontStyle: 'italic', // Added italic style
+  title: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#ff69b4',
+    textShadowColor: '#000000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    marginBottom: 4,
+    fontFamily: 'Dancing Script',
+    fontStyle: 'italic',
   },
   subtitle: {
     fontSize: 14,
@@ -84,5 +99,9 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 16,
     color: '#888888',
+  },
+  loadingCategories: {
+    alignItems: 'center',
+    marginVertical: 10,
   },
 });
