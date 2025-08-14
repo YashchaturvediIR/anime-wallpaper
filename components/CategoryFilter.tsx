@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#2a2a2a',
+    backgroundColor: '#3a3a3a', // Add a background color for better contrast
     borderWidth: 1,
     borderColor: '#3a3a3a',
   },
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     borderColor: '#8b5cf6',
   },
   categoryText: {
-    color: '#ffffff',
+    color: '#ff69b4', // Change text color to a brighter shade
+    // backgroundColor: '#2a2a2a', // Remove background color
     fontSize: 14,
     fontWeight: '500',
   },
