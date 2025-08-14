@@ -18,6 +18,7 @@ import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import * as Haptics from 'expo-haptics';
 import { useWallpaperStore } from '@/hooks/wallpaper-store';
+import { DownloadService } from '@/services/download-service';
 import { Wallpaper } from '@/types/wallpaper';
 
 export default function WallpaperDetailScreen() {
@@ -117,7 +118,7 @@ export default function WallpaperDetailScreen() {
         await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       }
       
-      Alert.alert('Error', 'Failed to download wallpaper. Please try again.');
+      Alert.alert('Error', 'Failed to download wallpaper. PRO Tip: Try sharing it... ');
     } finally {
       setIsDownloading(false);
     }
