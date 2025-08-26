@@ -14,27 +14,27 @@ import {
 const SAMPLE_WALLPAPERS = [
   {
     id: 1,
-    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    image: require('../assets/images/cat1.jpeg'),
     style: { top: 120, left: 40, width: 140, height: 200 },
   },
   {
     id: 2,
-    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    image: require('../assets/images/cat2.jpeg'),
     style: { top: 120, right: 40, width: 140, height: 200 },
   },
   {
     id: 3,
-    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    image: require('../assets/images/cat3.jpeg'),
     style: { top: 340, left: 20, width: 100, height: 140 },
   },
   {
     id: 4,
-    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    image: require('../assets/images/cat4.jpeg'),
     style: { top: 340, left: 140, width: 100, height: 140 },
   },
   {
     id: 5,
-    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    image: require('../assets/images/cat5.jpeg'),
     style: { top: 340, right: 20, width: 100, height: 140 },
   },
 ];
@@ -61,7 +61,7 @@ export default function WelcomeScreen() {
           {SAMPLE_WALLPAPERS.map((wallpaper) => (
             <View key={wallpaper.id} style={[styles.wallpaperCard, wallpaper.style]}>
               <Image
-                source={{ uri: wallpaper.imageUrl }}
+                source={wallpaper.image}
                 style={styles.wallpaperImage}
                 resizeMode="cover"
               />
