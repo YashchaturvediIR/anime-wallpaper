@@ -1,109 +1,188 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeInDown, FadeOut } from 'react-native-reanimated';
-import { Colors } from '../constants/Colors';
+import { router } from 'expo-router';
+import { ChevronRight } from 'lucide-react-native';
+import React from 'react';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-export default function Welcome() {
-  const router = useRouter();
-  const [isNavigating, setIsNavigating] = useState(false);
+const SAMPLE_WALLPAPERS = [
+  {
+    id: 1,
+    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    style: { top: 120, left: 40, width: 140, height: 200 },
+  },
+  {
+    id: 2,
+    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    style: { top: 120, right: 40, width: 140, height: 200 },
+  },
+  {
+    id: 3,
+    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    style: { top: 340, left: 20, width: 100, height: 140 },
+  },
+  {
+    id: 4,
+    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    style: { top: 340, left: 140, width: 100, height: 140 },
+  },
+  {
+    id: 5,
+    imageUrl: 'https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/3tw4q1tsq2ze0r6c3gy9t',
+    style: { top: 340, right: 20, width: 100, height: 140 },
+  },
+];
 
+export default function WelcomeScreen() {
   const handleStartExplore = () => {
-    setIsNavigating(true);
-    // Wait for the fadeout animation to complete before navigating
-    setTimeout(() => {
-      router.push('/(tabs)');
-    }, 500); // Match the duration of the fadeout animation
+    router.replace('/(tabs)');
   };
 
   return (
-    <Animated.View 
-      style={styles.container}
-      exiting={isNavigating ? FadeOut.duration(500) : undefined}
-    >
-      <StatusBar style="light" />
-      <Image
-        source={require('../assets/images/welcome.png')}
-        style={styles.bgImage}
-        resizeMode='cover'
-      />
-      {/**linear gradient */}
-      <Animated.View entering={FadeInDown.duration(600)} style={{flex:1}}>
-        <LinearGradient
-          colors={['rgba(255,255,255,0)','rgba(255,255,255,0.5)', 'white','white']}
-          style={styles.gradient}
-          start={{x:0.5,y:0}}
-          end={{x:0.5,y:0.8}}
-        />
-        {/**content */}
-        <View style={styles.contentContainer}>
-          <Animated.Text
-            entering={FadeInDown.delay(400).springify()}
-            style={styles.title}>
-            Pixels
-          </Animated.Text>
-          <Animated.Text
-            entering={FadeInDown.delay(500).springify()}
-            style={styles.punchLine}>
-            Every pixel tells a story
-          </Animated.Text>
-          <Animated.View
-            entering={FadeInDown.delay(600).springify()}>
-            <Pressable onPress={handleStartExplore} style={styles.startButton}>
-              <Text style={styles.startText}>Start Explore</Text>
-            </Pressable>
-          </Animated.View>
+    <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={['#1a1a2e', '#16213e', '#0f3460']}
+        style={styles.gradient}
+      >
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>PichoWalls</Text>
+          <Text style={styles.subtitle}>Walls that Speak Anime</Text>
         </View>
-      </Animated.View>
-    </Animated.View>
+
+        {/* Wallpaper Preview Grid */}
+        <View style={styles.wallpaperContainer}>
+          {SAMPLE_WALLPAPERS.map((wallpaper) => (
+            <View key={wallpaper.id} style={[styles.wallpaperCard, wallpaper.style]}>
+              <Image
+                source={{ uri: wallpaper.imageUrl }}
+                style={styles.wallpaperImage}
+                resizeMode="cover"
+              />
+            </View>
+          ))}
+        </View>
+
+        {/* Bottom Dark Gradient Overlay */}
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,0.3)', 'rgba(0,0,0,0.7)', 'rgba(0,0,0,0.9)']}
+          style={styles.bottomGradient}
+          pointerEvents="none"
+        />
+
+        {/* Start Button */}
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.startButton}
+            onPress={handleStartExplore}
+            activeOpacity={0.8}
+          >
+            <LinearGradient
+              colors={['#8b5cf6', '#7c3aed']}
+              style={styles.buttonGradient}
+            >
+              <ChevronRight color="white" size={24} style={styles.buttonIcon} />
+              <Text style={styles.buttonText}>Start Explore</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  bgImage: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute'
+    flex: 1,
+    backgroundColor: '#1a1a2e',
   },
   gradient: {
-    width: '100%',
-    height: '65%',
-    bottom: 0,
-    position: 'absolute'
-  },
-  contentContainer: {
     flex: 1,
+  },
+  header: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    gap: 14
+    paddingTop: 60,
+    paddingHorizontal: 20,
+    zIndex: 10,
   },
   title: {
-    fontSize: 40,
-    color: Colors.light.text,
-    fontWeight: 'bold'
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    marginBottom: 8,
   },
-  punchLine: {
-    fontSize: 16,
-    letterSpacing: 1,
-    marginBottom: 10,
-    fontWeight: '500'
+  subtitle: {
+    fontSize: 18,
+    color: '#a0a0a0',
+    textAlign: 'center',
+    fontWeight: '300',
+  },
+  wallpaperContainer: {
+    flex: 1,
+    position: 'relative',
+    marginTop: 40,
+  },
+  wallpaperCard: {
+    position: 'absolute',
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  wallpaperImage: {
+    width: '100%',
+    height: '100%',
+  },
+  bottomGradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 200,
+  },
+  buttonContainer: {
+    paddingHorizontal: 40,
+    paddingBottom: 60,
+    zIndex: 10,
   },
   startButton: {
-    marginBottom: 50,
-    backgroundColor: Colors.light.tint,
-    padding: 15,
-    paddingHorizontal: 90,
-    borderRadius: 20,
+    borderRadius: 25,
+    overflow: 'hidden',
+    shadowColor: '#8b5cf6',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  startText: {
-    color: Colors.light.background,
+  buttonGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 18,
+    paddingHorizontal: 32,
+  },
+  buttonIcon: {
+    marginRight: 8,
+  },
+  buttonText: {
+    color: 'white',
     fontSize: 18,
-    fontWeight: '500',
-    letterSpacing: 1
-  }
+    fontWeight: '600',
+  },
 });
