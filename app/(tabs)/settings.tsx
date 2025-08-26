@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Switch } from 'react-native';
-import { Stack } from 'expo-router';
 import { useWallpaperStore } from '@/hooks/wallpaper-store';
+import { Stack } from 'expo-router';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 
 export default function SettingsScreen() {
   const { settings, updateSettings } = useWallpaperStore();
@@ -121,11 +121,12 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f0f',
+    backgroundColor: '#1a1a2e',
   },
   content: {
     flex: 1,
-    padding: 20,
+    paddingVertical: 40,
+     paddingHorizontal: 20,
   },
   section: {
     marginBottom: 30,

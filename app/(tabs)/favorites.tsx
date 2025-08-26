@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
-import { Stack } from 'expo-router';
-import { useWallpaperStore } from '@/hooks/wallpaper-store';
 import WallpaperGrid from '@/components/WallpaperGrid';
+import { useWallpaperStore } from '@/hooks/wallpaper-store';
+import { Stack } from 'expo-router';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function FavoritesScreen() {
   const { favorites } = useWallpaperStore();
@@ -42,11 +42,11 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f0f',
+    backgroundColor: '#1a1a2e',
   },
   header: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 40,
   },
   title: {
     fontSize: 24,
