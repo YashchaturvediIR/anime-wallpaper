@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
-import { Stack } from 'expo-router';
-import { WallpaperCategory } from '@/types/wallpaper';
-import { useWallpapers } from '@/hooks/wallpaper-store';
-import WallpaperGrid from '@/components/WallpaperGrid';
 import CategoryFilter from '@/components/CategoryFilter';
+import WallpaperGrid from '@/components/WallpaperGrid';
+import { useWallpapers } from '@/hooks/wallpaper-store';
+import { WallpaperCategory } from '@/types/wallpaper';
+import { Stack } from 'expo-router';
+import React, { useState } from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState<WallpaperCategory>('waifu');
@@ -28,11 +28,15 @@ export default function HomeScreen() {
       <View style={styles.header}>
         {isLoading ? (
           <View style={styles.loadingCategories}>
-            <Text style={styles.loadingText}>Loading categories...</Text>
+            <Text style={styles.loadingText}>Loading App. Please wait...</Text>
           </View>
         ) : (
-          <View>
-            <Text style={styles.title}>Discover Amazing Wallpapers</Text>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require('@/assets/images/logo.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
             <Text style={styles.subtitle}>
               Thousands of anime wallpapers at your fingertips
             </Text>
@@ -42,13 +46,10 @@ export default function HomeScreen() {
 
       <View style={{ marginVertical: 10 }}> {/* Add margin for spacing */}
         <CategoryFilter
-         selectedCategory={selectedCategory}
-         onCategoryChange={handleCategoryChange}
-       />
+          selectedCategory={selectedCategory}
+          onCategoryChange={handleCategoryChange}
+        />
       </View> {/* Closing the View component */}
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
 
       {wallpapers && (
         <WallpaperGrid
@@ -70,11 +71,15 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f0f0f',
+    backgroundColor: '#1a1a2e',
   },
   header: {
     paddingHorizontal: 20,
     paddingVertical: 35,
+      alignItems: 'center',
+  justifyContent: 'center',
+  height: 180,
+  position: 'relative'
   },
   title: {
     fontSize: 28,
@@ -90,6 +95,12 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     color: '#888888',
+     marginTop: 8,  // only small gap from logo
+  position: 'absolute',
+  bottom: 30,   // stays inside header at bottom
+  textAlign: 'center',
+  width: '100%',
+     
   },
   loadingContainer: {
     flex: 1,
@@ -103,5 +114,19 @@ const styles = StyleSheet.create({
   loadingCategories: {
     alignItems: 'center',
     marginVertical: 10,
+  },
+  logoContainer: {
+     alignItems: 'center',
+  justifyContent: 'center',
+  position: 'absolute', // take logo out of normal flow
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  },
+  logo: {
+    width: 360,
+    height: 340,
+    resizeMode: 'contain',
   },
 });
