@@ -1,10 +1,10 @@
-import React from 'react';
-import { FlatList, StyleSheet, Dimensions, TouchableOpacity, View, Text } from 'react-native';
-import { Image } from 'expo-image';
-import { Heart } from 'lucide-react-native';
-import { Wallpaper } from '@/types/wallpaper';
 import { useWallpaperStore } from '@/hooks/wallpaper-store';
+import { Wallpaper } from '@/types/wallpaper';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
+import { Heart } from 'lucide-react-native';
+import React from 'react';
+import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface WallpaperGridProps {
   wallpapers: Wallpaper[];
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     height: ITEM_SIZE * 1.5,
     borderRadius: 12,
     overflow: 'hidden',
-    backgroundColor: '#1a1a1a',
+    backgroundColor: '#1a1a2e',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

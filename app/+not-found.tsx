@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Stack, router } from 'expo-router';
-import { Home, ArrowLeft } from 'lucide-react-native';
+import { ArrowLeft, Home } from 'lucide-react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function NotFoundScreen() {
   const handleGoHome = () => {
@@ -54,7 +54,7 @@ export default function NotFoundScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0a0a0a',
+    backgroundColor: '#1a1a2e',
   },
   content: {
     flex: 1,

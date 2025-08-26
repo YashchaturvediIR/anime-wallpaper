@@ -1,25 +1,24 @@
+import { useWallpaperStore } from '@/hooks/wallpaper-store';
+import { Wallpaper } from '@/types/wallpaper';
+import * as FileSystem from 'expo-file-system';
+import * as Haptics from 'expo-haptics';
+import { Image } from 'expo-image';
+import * as MediaLibrary from 'expo-media-library';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
+import * as Sharing from 'expo-sharing';
+import { ArrowLeft, Download, Heart, Share, Smartphone } from 'lucide-react-native';
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
   Alert,
   Platform,
   SafeAreaView,
   StatusBar,
+  StyleSheet,
+  Text,
   ToastAndroid,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Image } from 'expo-image';
-import { Stack, useLocalSearchParams, router } from 'expo-router';
-import { ArrowLeft, Heart, Download, Share, Smartphone } from 'lucide-react-native';
-import * as MediaLibrary from 'expo-media-library';
-import * as FileSystem from 'expo-file-system';
-import * as Sharing from 'expo-sharing';
-import * as Haptics from 'expo-haptics';
-import { useWallpaperStore } from '@/hooks/wallpaper-store';
-import { DownloadService } from '@/services/download-service';
-import { Wallpaper } from '@/types/wallpaper';
 
 export default function WallpaperDetailScreen() {
   const params = useLocalSearchParams();
@@ -239,7 +238,7 @@ export default function WallpaperDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    backgroundColor: '#1a1a2e',
   },
   imageContainer: {
     flex: 1,
