@@ -14,27 +14,27 @@ import {
 const SAMPLE_WALLPAPERS = [
   {
     id: 1,
-    image: require('../assets/images/welcome.png'),
+    image: require('../assets/images/cat1.jpeg'),
     style: { top: 120, left: 40, width: 140, height: 200 },
   },
   {
     id: 2,
-    image: require('../assets/images/welcome.png'),
+    image: require('../assets/images/cat2.jpeg'),
     style: { top: 120, right: 40, width: 140, height: 200 },
   },
   {
     id: 3,
-    image: require('../assets/images/welcome.png'),
+    image: require('../assets/images/cat3.jpeg'),
     style: { top: 340, left: 20, width: 100, height: 140 },
   },
   {
     id: 4,
-    image: require('../assets/images/welcome.png'),
+    image: require('../assets/images/cat4.jpeg'),
     style: { top: 340, left: 140, width: 100, height: 140 },
   },
   {
     id: 5,
-    image: require('../assets/images/welcome.png'),
+    image: require('../assets/images/cat5.jpeg'),
     style: { top: 340, right: 20, width: 100, height: 140 },
   },
 ];
