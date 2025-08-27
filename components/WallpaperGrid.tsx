@@ -59,7 +59,7 @@ export default function WallpaperGrid({ wallpapers, onRefresh, refreshing }: Wal
     return (
       <View style={styles.emptyContainer}>
         <Text style={styles.emptyText}>No wallpapers found</Text>
-        <Text style={styles.emptySubtext}>Pull down to refresh</Text>
+        <Text style={styles.emptySubtext}>Check your Internet connection</Text>
       </View>
     );
   }
