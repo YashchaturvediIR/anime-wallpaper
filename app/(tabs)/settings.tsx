@@ -108,7 +108,7 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>About</Text>
           <Text style={styles.aboutText}>
-            Anime Wallpapers v1.0.0{'\n'}
+            PichoWalls v1.0.0{'\n'}
             Powered by Waifu.pics API{'\n'}
             Made with ❤️ for anime fans
           </Text>

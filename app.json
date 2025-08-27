@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "AnimeWallpaperApp",
-    "slug": "AnimeWallpaperApp",
+    "name": "PichoWalls",
+    "slug": "PichoWalls",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "animewallpaperapp",
+    "scheme": "pichowalls",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
