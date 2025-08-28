@@ -52,7 +52,11 @@ export default function IndexScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>PichoWalls</Text>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <Text style={styles.subtitle}>Walls that Speak Anime</Text>
         </View>
 
@@ -107,27 +111,31 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    paddingTop: 60,
+    justifyContent:'center',
+    paddingTop: 20, // Adjusted padding to keep the logo centered
     paddingHorizontal: 20,
     zIndex: 10,
+    height: 200, 
+     marginBottom: 20,// Adjusted height for the header to accommodate the logo
   },
-  title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#ff69b4',
-    textAlign: 'center',
-    marginBottom: 8,
+  logo:{
+     width: 300,   // ✅ similar to your screenshot size
+    height: 800,   // ✅ balanced height (not huge like 600px)
+    
   },
   subtitle: {
     fontSize: 18,
     color: '#a0a0a0',
     textAlign: 'center',
     fontWeight: '300',
+     marginTop: 8,
+      position: 'absolute',   // ✅ keeps subtitle stuck right below logo
+  bottom: 30,   
   },
   wallpaperContainer: {
     flex: 1,
     position: 'relative',
-    marginTop: 40,
+    marginTop: 20, // Reduced margin to prevent overlap
   },
   wallpaperCard: {
     position: 'absolute',
