@@ -58,6 +58,11 @@ export default function IndexScreen() {
             resizeMode="contain"
           />
           <Text style={styles.subtitle}>Walls that Speak Anime</Text>
+          <Image
+        source={require("../assets/images/transparent.png")} // put your Untitled8.png here
+        style={styles.trans}
+        resizeMode="contain"
+      />
         </View>
 
         {/* Wallpaper Preview Grid */}
@@ -88,9 +93,11 @@ export default function IndexScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-              colors={['#8b5cf6', '#7c3aed']}
-              style={styles.buttonGradient}
-            >
+      colors={['#6d28d9', '#3b82f6']}  // purple → blue like screenshot
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.buttonGradient}
+    >
               <ChevronRight color="white" size={24} style={styles.buttonIcon} />
               <Text style={styles.buttonText}>Start Explore</Text>
             </LinearGradient>
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent:'center',
-    paddingTop: 20, // Adjusted padding to keep the logo centered
+    paddingTop: 80, // Adjusted padding to keep the logo centered
     paddingHorizontal: 20,
     zIndex: 10,
     height: 200, 
@@ -120,15 +127,23 @@ const styles = StyleSheet.create({
   },
   logo:{
      width: 300,   // ✅ similar to your screenshot size
-    height: 800,   // ✅ balanced height (not huge like 600px)
-    
+    height: 800, 
+    marginBottom: 70  // ✅ balanced height (not huge like 600px)
+  },
+  trans:{
+     width: 180,   // adjust as needed
+    height: 120,  // adjust as needed
+    marginTop: 320,
+    position:'absolute',
+    resizeMode: 'contain',
+    opacity:0.9
   },
   subtitle: {
     fontSize: 18,
     color: '#a0a0a0',
     textAlign: 'center',
     fontWeight: '300',
-     marginTop: 8,
+     marginBottom: 12,
       position: 'absolute',   // ✅ keeps subtitle stuck right below logo
   bottom: 30,   
   },
@@ -167,26 +182,27 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   startButton: {
-    borderRadius: 25,
+    borderRadius: 50,
     overflow: 'hidden',
-    shadowColor: '#8b5cf6',
+    shadowColor: '#3b82f6',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 6,
     },
     shadowOpacity: 0.4,
     shadowRadius: 12,
-    elevation: 8,
+    elevation: 10,
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 40,
+     borderRadius: 50, 
   },
   buttonIcon: {
-    marginRight: 8,
+    marginRight: 10,
   },
   buttonText: {
     color: 'white',
