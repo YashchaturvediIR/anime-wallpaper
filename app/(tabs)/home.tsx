@@ -26,22 +26,16 @@ export default function HomeScreen() {
       />
 
       <View style={styles.header}>
-        {isLoading ? (
-          <View style={styles.loadingCategories}>
-            <Text style={styles.loadingText}>Loading App. Please wait...</Text>
-          </View>
-        ) : (
-          <View style={styles.logoContainer}>
-            <Image
-              source={require('@/assets/images/logo.png')}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            <Text style={styles.subtitle}>
-              Thousands of anime wallpapers at your fingertips
-            </Text>
-          </View>
-        )}
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('@/assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+          <Text style={styles.subtitle}>
+            Thousands of anime wallpapers at your fingertips
+          </Text>
+        </View>
       </View>
 
       <View style={{ marginVertical: 10 }}> {/* Add margin for spacing */}
@@ -110,10 +104,6 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 16,
     color: '#888888',
-  },
-  loadingCategories: {
-    alignItems: 'center',
-    marginVertical: 10,
   },
   logoContainer: {
      alignItems: 'center',
