@@ -39,9 +39,9 @@ const SAMPLE_WALLPAPERS = [
   },
 ];
 
-export default function WelcomeScreen() {
+export default function IndexScreen() {
   const handleStartExplore = () => {
-    router.replace('/(tabs)');
+    router.replace('/(tabs)/home');
   };
 
   return (
