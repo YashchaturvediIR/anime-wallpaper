@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import createContextHook from '@nkzw/create-context-hook';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Wallpaper, WallpaperSettings, WallpaperCategory } from '@/types/wallpaper';
 import { WallpaperAPI } from '@/services/wallpaper-api';
+import { Wallpaper, WallpaperCategory, WallpaperSettings } from '@/types/wallpaper';
+import createContextHook from '@nkzw/create-context-hook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const FAVORITES_KEY = 'wallpaper_favorites';
 const SETTINGS_KEY = 'wallpaper_settings';
@@ -12,7 +12,7 @@ export const [WallpaperProvider, useWallpaperStore] = createContextHook(() => {
   const queryClient = useQueryClient();
   const [favorites, setFavorites] = useState<Wallpaper[]>([]);
   const [settings, setSettings] = useState<WallpaperSettings>({
-    quality: 'HD',
+    quality: 'SD',
     autoCache: true,
   });
 
@@ -30,7 +30,7 @@ export const [WallpaperProvider, useWallpaperStore] = createContextHook(() => {
     queryKey: ['settings'],
     queryFn: async () => {
       const stored = await AsyncStorage.getItem(SETTINGS_KEY);
-      return stored ? JSON.parse(stored) : { quality: 'HD', autoCache: true };
+      return stored ? JSON.parse(stored) : { quality: 'SD', autoCache: true };
     },
   });
 
