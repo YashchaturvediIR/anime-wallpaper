@@ -1,14 +1,15 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
+  Animated,
   Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
 
 const SAMPLE_WALLPAPERS = [
@@ -40,6 +41,25 @@ const SAMPLE_WALLPAPERS = [
 ];
 
 export default function IndexScreen() {
+  const scaleAnim = useRef(new Animated.Value(0)).current;
+  const rotateAnim = useRef(new Animated.Value(0)).current;
+  
+  useEffect(() => {
+    Animated.parallel([
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        friction: 3,
+        tension: 40,
+        useNativeDriver: true,
+      }),
+      Animated.timing(rotateAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      })
+    ]).start();
+  }, [scaleAnim, rotateAnim]);
+
   const handleStartExplore = () => {
     router.replace('/(tabs)/home');
   };
@@ -58,11 +78,24 @@ export default function IndexScreen() {
             resizeMode="contain"
           />
           <Text style={styles.subtitle}>Walls that Speak Anime</Text>
-          <Image
-        source={require("../assets/images/transparent.png")} // put your Untitled8.png here
-        style={styles.trans}
-        resizeMode="contain"
-      />
+            <Animated.Image
+            source={require("../assets/images/transparent.png")}
+            style={[
+              styles.trans,
+              {
+                transform: [
+                  { scale: scaleAnim },
+                  { 
+                    rotate: rotateAnim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['0deg', '360deg']
+                    })
+                  }
+                ]
+              }
+            ]}
+            resizeMode="contain"
+          />
         </View>
 
         {/* Wallpaper Preview Grid */}
@@ -136,7 +169,7 @@ const styles = StyleSheet.create({
     marginTop: 320,
     position:'absolute',
     resizeMode: 'contain',
-    opacity:0.9
+    opacity:1
   },
   subtitle: {
     fontSize: 18,
