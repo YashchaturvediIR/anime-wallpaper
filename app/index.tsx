@@ -4,6 +4,7 @@ import { ChevronRight } from 'lucide-react-native';
 import React, { useEffect, useRef } from 'react';
 import {
   Animated,
+  Dimensions,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -12,33 +13,71 @@ import {
   View
 } from 'react-native';
 
-const SAMPLE_WALLPAPERS = [
-  {
-    id: 1,
-    image: require('../assets/images/cat1.jpeg'),
-    style: { top: 120, left: 40, width: 140, height: 200 },
-  },
-  {
-    id: 2,
-    image: require('../assets/images/cat2.jpeg'),
-    style: { top: 120, right: 40, width: 140, height: 200 },
-  },
-  {
-    id: 3,
-    image: require('../assets/images/cat3.jpeg'),
-    style: { top: 340, left: 20, width: 100, height: 140 },
-  },
-  {
-    id: 4,
-    image: require('../assets/images/cat4.jpeg'),
-    style: { top: 340, left: 140, width: 100, height: 140 },
-  },
-  {
-    id: 5,
-    image: require('../assets/images/cat5.jpeg'),
-    style: { top: 340, right: 20, width: 100, height: 140 },
-  },
-];
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const isSmallScreen = SCREEN_WIDTH < 375;
+const isLargeScreen = SCREEN_WIDTH > 414;
+
+// Revised wallpaper positioning to ensure all are visible
+const getWallpaperStyles = () => {
+  const baseWidth = SCREEN_WIDTH * 0.35;
+  const baseHeight = baseWidth * 1.4;
+
+  const topOffset = SCREEN_HEIGHT * 0.1; 
+  const verticalSpacing = SCREEN_HEIGHT * 0.05; // 5% vertical spacing between rows
+
+  return [
+    {
+      id: 1,
+      image: require('../assets/images/cat1.jpeg'),
+      style: { 
+        top: topOffset, 
+        left: SCREEN_WIDTH * 0.1, 
+        width: baseWidth, 
+        height: baseHeight 
+      },
+    },
+    {
+      id: 2,
+      image: require('../assets/images/cat2.jpeg'),
+      style: { 
+        top: topOffset, 
+        right: SCREEN_WIDTH * 0.1, 
+        width: baseWidth, 
+        height: baseHeight 
+      },
+    },
+    {
+      id: 3,
+      image: require('../assets/images/cat3.jpeg'),
+      style: { 
+        top: topOffset + baseHeight + verticalSpacing, // Pushed down to the next row
+        left: SCREEN_WIDTH * 0.05, 
+        width: baseWidth * 0.7, 
+        height: baseHeight * 0.7 
+      },
+    },
+    {
+      id: 4,
+      image: require('../assets/images/cat4.jpeg'),
+      style: { 
+        top: topOffset + baseHeight + verticalSpacing,
+        left: SCREEN_WIDTH * 0.35, 
+        width: baseWidth * 0.7, 
+        height: baseHeight * 0.7 
+      },
+    },
+    {
+      id: 5,
+      image: require('../assets/images/cat5.jpeg'),
+      style: { 
+        top: topOffset + baseHeight + verticalSpacing,
+        right: SCREEN_WIDTH * 0.05, 
+        width: baseWidth * 0.7, 
+        height: baseHeight * 0.7 
+      },
+    },
+  ];
+};
 
 export default function IndexScreen() {
   const scaleAnim = useRef(new Animated.Value(0)).current;
@@ -62,7 +101,7 @@ export default function IndexScreen() {
       ]),
       Animated.timing(growAnim, {
         toValue: 1.2,
-        duration: 1500,
+        duration: 500,
         useNativeDriver: true,
       }),
     ]).start();
@@ -86,7 +125,7 @@ export default function IndexScreen() {
             resizeMode="contain"
           />
           <Text style={styles.subtitle}>Walls that Speak Anime</Text>
-            <Animated.Image
+          <Animated.Image
             source={require("../assets/images/transparent.png")}
             style={[
               styles.trans,
@@ -108,7 +147,7 @@ export default function IndexScreen() {
 
         {/* Wallpaper Preview Grid */}
         <View style={styles.wallpaperContainer}>
-          {SAMPLE_WALLPAPERS.map((wallpaper) => (
+          {getWallpaperStyles().map((wallpaper) => (
             <View key={wallpaper.id} style={[styles.wallpaperCard, wallpaper.style]}>
               <Image
                 source={wallpaper.image}
@@ -134,11 +173,11 @@ export default function IndexScreen() {
             activeOpacity={0.8}
           >
             <LinearGradient
-      colors={['#6d28d9', '#3b82f6']}  // purple → blue like screenshot
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 0 }}
-      style={styles.buttonGradient}
-    >
+              colors={['#6d28d9', '#3b82f6']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.buttonGradient}
+            >
               <ChevronRight color="white" size={24} style={styles.buttonIcon} />
               <Text style={styles.buttonText}>Start Explore</Text>
             </LinearGradient>
@@ -149,105 +188,112 @@ export default function IndexScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1a1a2e',
-  },
-  gradient: {
-    flex: 1,
-  },
-  header: {
-    alignItems: 'center',
-    justifyContent:'center',
-    paddingTop: 80, // Adjusted padding to keep the logo centered
-    paddingHorizontal: 20,
-    zIndex: 10,
-    height: 200, 
-     marginBottom: 20,// Adjusted height for the header to accommodate the logo
-  },
-  logo:{
-     width: 300,   // ✅ similar to your screenshot size
-    height: 800, 
-    marginBottom: 70  // ✅ balanced height (not huge like 600px)
-  },
-  trans:{
-     width: 180,   // adjust as needed
-    height: 120,  // adjust as needed
-    marginTop: 320,
-    position:'absolute',
-    resizeMode: 'contain',
-    opacity:1
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#a0a0a0',
-    textAlign: 'center',
-    fontWeight: '300',
-     marginBottom: 12,
-      position: 'absolute',   // ✅ keeps subtitle stuck right below logo
-  bottom: 30,   
-  },
-  wallpaperContainer: {
-    flex: 1,
-    position: 'relative',
-    marginTop: 20, // Reduced margin to prevent overlap
-  },
-  wallpaperCard: {
-    position: 'absolute',
-    borderRadius: 16,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
+// Create responsive styles function
+const getStyles = () => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1a1a2e',
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-  wallpaperImage: {
-    width: '100%',
-    height: '100%',
-  },
-  bottomGradient: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 200,
-  },
-  buttonContainer: {
-    paddingHorizontal: 40,
-    paddingBottom: 60,
-    zIndex: 10,
-  },
-  startButton: {
-    borderRadius: 50,
-    overflow: 'hidden',
-    shadowColor: '#3b82f6',
-    shadowOffset: {
-      width: 0,
-      height: 6,
+    gradient: {
+      flex: 1,
     },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 10,
-  },
-  buttonGradient: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 40,
-     borderRadius: 50, 
-  },
-  buttonIcon: {
-    marginRight: 10,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-});
+    header: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: SCREEN_HEIGHT * 0.1,
+      paddingHorizontal: SCREEN_WIDTH * 0.05,
+      zIndex: 10,
+      height: SCREEN_HEIGHT * 0.25,
+      marginBottom: SCREEN_HEIGHT * 0.03,
+    },
+    logo: {
+      width: SCREEN_WIDTH * 0.7,
+      height: SCREEN_WIDTH * 0.7 * 2.67,
+      marginBottom: SCREEN_HEIGHT * 0.08,
+    },
+    trans: {
+      width: SCREEN_WIDTH * 0.4,
+      height: SCREEN_WIDTH * 0.4 * 0.67,
+      marginTop: SCREEN_HEIGHT * 0.35,
+      position: 'absolute',
+      resizeMode: 'contain',
+      opacity: 1
+    },
+    subtitle: {
+      fontSize: isSmallScreen ? 16 : 18,
+      color: '#a0a0a0',
+      textAlign: 'center',
+      fontWeight: '300',
+      marginBottom: 12,
+      position: 'absolute',
+      bottom: SCREEN_HEIGHT * 0.04,
+    },
+    wallpaperContainer: {
+      flex: 1,
+      position: 'relative',
+      // Adjusting these values to make space
+      marginTop: SCREEN_HEIGHT * 0.02,
+      marginBottom: SCREEN_HEIGHT * 0.05, // Increased bottom margin
+    },
+    wallpaperCard: {
+      position: 'absolute',
+      borderRadius: 16,
+      overflow: 'hidden',
+      shadowColor: 'silver',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 8,
+    },
+    wallpaperImage: {
+      width: '100%',
+      height: '100%',
+    },
+    bottomGradient: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: SCREEN_HEIGHT * 0.25,
+    },
+    buttonContainer: {
+      paddingHorizontal: SCREEN_WIDTH * 0.1,
+      paddingBottom: SCREEN_HEIGHT * 0.08,
+      zIndex: 10,
+    },
+    startButton: {
+      borderRadius: 50,
+      overflow: 'hidden',
+      shadowColor: '#3b82f6',
+      shadowOffset: {
+        width: 0,
+        height: 6,
+      },
+      shadowOpacity: 0.4,
+      shadowRadius: 12,
+      elevation: 10,
+    },
+    buttonGradient: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 16,
+      paddingHorizontal: 40,
+      borderRadius: 50,
+    },
+    buttonIcon: {
+      marginRight: 10,
+    },
+    buttonText: {
+      color: 'white',
+      fontSize: isSmallScreen ? 16 : 18,
+      fontWeight: '600',
+    },
+  });
+};
+
+const styles = getStyles();
