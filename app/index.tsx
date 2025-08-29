@@ -43,22 +43,30 @@ const SAMPLE_WALLPAPERS = [
 export default function IndexScreen() {
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const rotateAnim = useRef(new Animated.Value(0)).current;
-  
+  const growAnim = useRef(new Animated.Value(1)).current;
+
   useEffect(() => {
-    Animated.parallel([
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        friction: 3,
-        tension: 40,
+    Animated.sequence([
+      Animated.parallel([
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 3,
+          tension: 40,
+          useNativeDriver: true,
+        }),
+        Animated.timing(rotateAnim, {
+          toValue: 1,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.timing(growAnim, {
+        toValue: 1.2,
+        duration: 1500,
         useNativeDriver: true,
       }),
-      Animated.timing(rotateAnim, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      })
     ]).start();
-  }, [scaleAnim, rotateAnim]);
+  }, [scaleAnim, rotateAnim, growAnim]);
 
   const handleStartExplore = () => {
     router.replace('/(tabs)/home');
@@ -84,7 +92,7 @@ export default function IndexScreen() {
               styles.trans,
               {
                 transform: [
-                  { scale: scaleAnim },
+                  { scale: Animated.multiply(scaleAnim, growAnim) },
                   { 
                     rotate: rotateAnim.interpolate({
                       inputRange: [0, 1],
